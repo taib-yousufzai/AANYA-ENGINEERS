@@ -23,7 +23,7 @@ const NAV = [
   { to: "/careers", label: "Careers" },
   { to: "/services", label: "Services" },
   { to: "/projects", label: "Projects" },
-  { to: "/gallery", label: "Gallery" },
+
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact Us" },
 ] as const;
@@ -256,7 +256,6 @@ export function Footer() {
             { label: "Careers", to: "/careers" },
             { label: "Services", to: "/services" },
             { label: "Projects", to: "/projects" },
-            { label: "Gallery", to: "/gallery" },
             { label: "Blog", to: "/blog" },
             { label: "Contact", to: "/contact" },
           ]} />

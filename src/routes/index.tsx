@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import { Header, Footer, StatsBar, StarRating } from "@/components/site/layout";
-import { services, testimonials, competencies, stats, galleryImages, blogPosts } from "@/components/site/data";
+import { services, testimonials, competencies, stats, blogPosts } from "@/components/site/data";
 
 export default function Home() {
   return (
@@ -16,7 +16,6 @@ export default function Home() {
       <ServicesPreview />
       <StatsBar stats={stats} />
       <CompetenciesBlock />
-      <GalleryTeaser />
       <TestimonialsCarousel />
       <BlogPreview />
       <Footer />
@@ -144,29 +143,6 @@ function CompetenciesBlock() {
   );
 }
 
-function GalleryTeaser() {
-  return (
-    <section className="container-x pb-24 md:pb-32">
-      <div className="mx-auto max-w-3xl text-center mb-12">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-primary">Gallery</p>
-        <h2 className="font-display text-4xl font-bold md:text-5xl text-gradient-fade">On Ground Images</h2>
-        <p className="mt-4 text-muted-foreground">A glimpse into the people, equipment and execution behind AEPL projects.</p>
-      </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {galleryImages.slice(0, 8).map((src, i) => (
-          <div key={i} className="group overflow-hidden rounded-2xl">
-            <img src={src} alt={`AEPL project ${i + 1}`} loading="lazy" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
-          </div>
-        ))}
-      </div>
-      <div className="mt-10 text-center">
-        <Link to="/gallery" className="inline-flex items-center gap-2 rounded-full border-2 border-foreground/20 px-7 py-4 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition">
-          View Full Gallery →
-        </Link>
-      </div>
-    </section>
-  );
-}
 
 function TestimonialsCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [

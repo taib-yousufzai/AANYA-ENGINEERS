@@ -4,7 +4,7 @@ import About from "./routes/about";
 import Careers from "./routes/careers";
 import Services from "./routes/services";
 import Projects from "./routes/projects";
-import Gallery from "./routes/gallery";
+
 import Blog from "./routes/blog";
 import Contact from "./routes/contact";
 import NotFound from "./routes/not-found";
@@ -17,7 +17,7 @@ export default function App() {
       <Route path="/careers" element={<Careers />} />
       <Route path="/services" element={<Services />} />
       <Route path="/projects" element={<Projects />} />
-      <Route path="/gallery" element={<Gallery />} />
+
       <Route path="/blog" element={<Blog />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
