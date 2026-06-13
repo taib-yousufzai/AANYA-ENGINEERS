@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { PageShell, PageHero } from "@/components/site/layout";
 
 export default function ContactPage() {
@@ -91,40 +92,87 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <form
-              className="rounded-2xl bg-dark-foreground/5 p-8 ring-1 ring-dark-foreground/10"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <h3 className="font-display text-xl font-semibold mb-6">Send us a message</h3>
-              <div className="grid gap-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Input label="Your Name" />
-                  <Input label="Phone" type="tel" />
-                </div>
-                <Input label="Email" type="email" />
-                <Input label="Subject" />
-                <div>
-                  <label className="text-xs uppercase tracking-wider text-dark-foreground/60">
-                    Message
-                  </label>
-                  <textarea
-                    rows={5}
-                    placeholder="Tell us about your project..."
-                    className="mt-2 w-full rounded-xl border border-dark-foreground/15 bg-transparent px-4 py-3 outline-none focus:border-primary resize-none placeholder:text-dark-foreground/30"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="mt-2 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition w-full"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
     </PageShell>
+  );
+}
+
+function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setTimeout(() => {
+      setStatus("sent");
+    }, 1000);
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="rounded-2xl bg-dark-foreground/5 p-8 ring-1 ring-dark-foreground/10 flex flex-col items-center justify-center text-center gap-4">
+        {/* Green checkmark */}
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <path d="M5 12l5 5L20 7" />
+          </svg>
+        </div>
+        <h3 className="font-display text-2xl font-bold text-dark-foreground">Message sent!</h3>
+        <p className="text-dark-foreground/70 max-w-xs">
+          We'll get back to you within one business day.
+        </p>
+        <button
+          onClick={() => setStatus("idle")}
+          className="mt-2 rounded-full border border-dark-foreground/20 px-6 py-3 text-sm font-semibold text-dark-foreground hover:border-primary hover:text-primary transition"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      className="rounded-2xl bg-dark-foreground/5 p-8 ring-1 ring-dark-foreground/10"
+      onSubmit={handleSubmit}
+    >
+      <h3 className="font-display text-xl font-semibold mb-6">Send us a message</h3>
+      <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Input label="Your Name" />
+          <Input label="Phone" type="tel" />
+        </div>
+        <Input label="Email" type="email" />
+        <Input label="Subject" />
+        <div>
+          <label className="text-xs uppercase tracking-wider text-dark-foreground/60">
+            Message
+          </label>
+          <textarea
+            rows={5}
+            placeholder="Tell us about your project..."
+            className="mt-2 w-full rounded-xl border border-dark-foreground/15 bg-transparent px-4 py-3 outline-none focus:border-primary resize-none placeholder:text-dark-foreground/30"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="mt-2 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition w-full disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {status === "sending" ? "Sending..." : "Send Message"}
+        </button>
+      </div>
+    </form>
   );
 }
 

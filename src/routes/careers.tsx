@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import { useState } from "react";
 import { PageShell, PageHero } from "@/components/site/layout";
 import { useSiteData } from "@/context/SiteDataContext";
+import { FadeUp } from "@/hooks/use-fade-up";
+import { SkeletonCard } from "@/components/site/Skeleton";
 
 const WHY_JOIN = [
   {
@@ -75,7 +77,7 @@ const WHY_JOIN = [
 ];
 
 export default function CareersPage() {
-  const { jobOpenings } = useSiteData();
+  const { jobOpenings, loading } = useSiteData();
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
 
   return (
@@ -83,137 +85,164 @@ export default function CareersPage() {
       <PageHero
         eyebrow="Careers"
         title="Build something that lasts"
-        subtitle="We're looking for driven engineers, supervisors, and specialists to join AEPL's growing team."
+        subtitle="We're looking for driven engineers, supervisors, and specialists to join Aanya Engineers' growing team."
         breadcrumb={[{ label: "Careers" }]}
       />
 
-      <section className="container-x py-24">
-        <div className="text-center mb-14">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
-            Why AEPL
-          </p>
-          <h2 className="font-display text-4xl font-bold md:text-5xl text-gradient-fade">
-            Why work with us?
-          </h2>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {WHY_JOIN.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border bg-card p-7 hover:shadow-lg transition-shadow"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                {item.icon}
-              </div>
-              <h3 className="mt-5 font-display text-lg font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-dark text-dark-foreground py-24 rounded-[2.5rem] mx-2 md:mx-6">
-        <div className="container-x">
+      <FadeUp>
+        <section className="container-x py-24">
           <div className="text-center mb-14">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
-              Open Roles
+              Why Aanya Engineers
             </p>
-            <h2 className="font-display text-4xl font-bold md:text-5xl">Current openings</h2>
-            <p className="mt-4 text-dark-foreground/70 max-w-xl mx-auto">
-              Don't see a fit? Send your CV to{" "}
-              <a
-                href="mailto:Info.aeplongc@aanyaengineers.com"
-                className="text-primary underline underline-offset-4"
-              >
-                Info.aeplongc@aanyaengineers.com
-              </a>
-            </p>
+            <h2 className="font-display text-4xl font-bold md:text-5xl text-gradient-fade">
+              Why work with us?
+            </h2>
           </div>
-          <div className="space-y-4 max-w-4xl mx-auto">
-            {jobOpenings.map((job, i) => (
-              <div
-                key={job.title}
-                className="rounded-2xl bg-dark-foreground/5 ring-1 ring-dark-foreground/10 overflow-hidden"
-              >
-                <button
-                  onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
-                  className="flex w-full items-start justify-between gap-4 px-7 py-6 text-left"
-                  aria-expanded={expandedIdx === i}
-                >
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="rounded-full bg-primary/20 px-2.5 py-0.5 text-xs font-medium text-primary">
-                        {job.department}
-                      </span>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${job.type === "Contract" ? "bg-dark-foreground/10 text-dark-foreground/70" : "bg-primary/10 text-primary"}`}
-                      >
-                        {job.type}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-lg font-semibold">{job.title}</h3>
-                    <div className="mt-1 flex flex-wrap items-center gap-4 text-sm text-dark-foreground/60">
-                      <span className="flex items-center gap-1.5">
-                        <svg
-                          width="13"
-                          height="13"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                          <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        {job.location}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <svg
-                          width="13"
-                          height="13"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
-                          <circle cx="12" cy="12" r="10" />
-                          <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        {job.experience} exp.
-                      </span>
-                    </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {WHY_JOIN.map((item, index) => (
+              <FadeUp key={item.title} delay={index * 80}>
+                <div className="rounded-2xl border bg-card p-7 hover:shadow-lg transition-shadow">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    {item.icon}
                   </div>
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary transition-transform mt-1 ${expandedIdx === i ? "rotate-45" : ""}`}
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                    >
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                  </span>
-                </button>
-                {expandedIdx === i && (
-                  <div className="px-7 pb-7 border-t border-dark-foreground/10 pt-5">
-                    <p className="text-dark-foreground/80 leading-relaxed">{job.description}</p>
-                    <a
-                      href={`mailto:Info.aeplongc@aanyaengineers.com?subject=Application: ${encodeURIComponent(job.title)}`}
-                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition"
-                    >
-                      Apply for this role →
-                    </a>
-                  </div>
-                )}
-              </div>
+                  <h3 className="mt-5 font-display text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              </FadeUp>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </FadeUp>
+
+      <FadeUp>
+        <section className="bg-dark text-dark-foreground py-24 rounded-[2.5rem] mx-2 md:mx-6">
+          <div className="container-x">
+            <div className="text-center mb-14">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
+                Open Roles
+              </p>
+              <h2 className="font-display text-4xl font-bold md:text-5xl">Current openings</h2>
+              <p className="mt-4 text-dark-foreground/70 max-w-xl mx-auto">
+                Don't see a fit? Send your CV to{" "}
+                <a
+                  href="mailto:Info.aeplongc@aanyaengineers.com"
+                  className="text-primary underline underline-offset-4"
+                >
+                  Info.aeplongc@aanyaengineers.com
+                </a>
+              </p>
+            </div>
+
+            {loading ? (
+              <div className="space-y-4 max-w-4xl mx-auto">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <SkeletonCard key={i} className="aspect-auto h-28" />
+                ))}
+              </div>
+            ) : jobOpenings.length === 0 ? (
+              <div className="text-center py-12 max-w-xl mx-auto">
+                <p className="text-dark-foreground/70 text-lg">
+                  No open positions at the moment.
+                </p>
+                <p className="mt-3 text-dark-foreground/60">
+                  Send your CV to{" "}
+                  <a
+                    href="mailto:info.aeplongc@aanyaengineers.com"
+                    className="text-primary underline underline-offset-4"
+                  >
+                    info.aeplongc@aanyaengineers.com
+                  </a>
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4 max-w-4xl mx-auto">
+                {jobOpenings.map((job, i) => (
+                  <div
+                    key={job.title}
+                    className="rounded-2xl bg-dark-foreground/5 ring-1 ring-dark-foreground/10 overflow-hidden"
+                  >
+                    <button
+                      onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
+                      className="flex w-full items-start justify-between gap-4 px-7 py-6 text-left"
+                      aria-expanded={expandedIdx === i}
+                    >
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <span className="rounded-full bg-primary/20 px-2.5 py-0.5 text-xs font-medium text-primary">
+                            {job.department}
+                          </span>
+                          <span
+                            className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${job.type === "Contract" ? "bg-dark-foreground/10 text-dark-foreground/70" : "bg-primary/10 text-primary"}`}
+                          >
+                            {job.type}
+                          </span>
+                        </div>
+                        <h3 className="font-display text-lg font-semibold">{job.title}</h3>
+                        <div className="mt-1 flex flex-wrap items-center gap-4 text-sm text-dark-foreground/60">
+                          <span className="flex items-center gap-1.5">
+                            <svg
+                              width="13"
+                              height="13"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            {job.location}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <svg
+                              width="13"
+                              height="13"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            {job.experience} exp.
+                          </span>
+                        </div>
+                      </div>
+                      <span
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary transition-transform mt-1 ${expandedIdx === i ? "rotate-45" : ""}`}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                        >
+                          <path d="M12 5v14M5 12h14" />
+                        </svg>
+                      </span>
+                    </button>
+                    {expandedIdx === i && (
+                      <div className="px-7 pb-7 border-t border-dark-foreground/10 pt-5">
+                        <p className="text-dark-foreground/80 leading-relaxed">{job.description}</p>
+                        <a
+                          href={`mailto:Info.aeplongc@aanyaengineers.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                          className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition"
+                        >
+                          Apply for this role →
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      </FadeUp>
 
       <section className="container-x py-24">
         <div className="rounded-[2rem] bg-gradient-to-br from-primary/20 via-secondary to-secondary p-10 md:p-16">

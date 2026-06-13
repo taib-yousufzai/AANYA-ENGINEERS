@@ -36,7 +36,7 @@
   --foreground: oklch(0.18 0.02 250);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.02 250);
-  --primary: oklch(0.78 0.17 65); /* AEPL orange/yellow */
+  --primary: oklch(0.78 0.17 65); /* Aanya Engineers orange/yellow */
   --primary-foreground: oklch(0.15 0.02 250);
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.18 0.02 250);
@@ -68,6 +68,55 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+  p {
+    line-height: 1.75;
+  }
+}
+
+/* ─── Scroll fade-up animation ─────────────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+/* ─── Hero entrance animation ──────────────────────────────────────────────── */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-in {
+  animation: hero-in 0.6s ease-out both;
+}
+
+/* ─── Page transition animation ────────────────────────────────────────────── */
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-page-in {
+  animation: page-in 0.25s ease-out;
 }
 
 @layer utilities {

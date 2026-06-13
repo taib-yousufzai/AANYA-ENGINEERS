@@ -2,23 +2,26 @@ import { Link } from "react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useCallback, useEffect, useState } from "react";
-import heroImg from "@/assets/hero.jpg";
-import aboutImg from "@/assets/about.jpg";
 import { Header, Footer, StatsBar, StarRating } from "@/components/site/layout";
-import { services, competencies, stats, scopeOfWork } from "@/components/site/data";
+import { services, competencies, stats } from "@/components/site/data";
 import { useSiteData } from "@/context/SiteDataContext";
+import { FadeUp } from "@/hooks/use-fade-up";
+import { SkeletonCard } from "@/components/site/Skeleton";
+
+const heroImg = "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1920&q=85";
+const aboutImg = "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80";
 
 export default function Home() {
   return (
     <div className="bg-background text-foreground">
       <Header transparent />
       <Hero />
-      <AboutTeaser />
-      <ServicesPreview />
+      <FadeUp><AboutTeaser /></FadeUp>
+      <FadeUp><ServicesPreview /></FadeUp>
       <StatsBar stats={stats} />
-      <CompetenciesBlock />
-      <TestimonialsCarousel />
-      <BlogPreview />
+      <FadeUp><CompetenciesBlock /></FadeUp>
+      <FadeUp><TestimonialsCarousel /></FadeUp>
+      <FadeUp><BlogPreview /></FadeUp>
       <Footer />
     </div>
   );
@@ -36,22 +39,34 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-dark/65 via-dark/45 to-dark/75" />
       <div className="relative container-x flex min-h-[100svh] flex-col items-center justify-center pt-32 pb-24 text-center text-dark-foreground">
-        <p className="mb-6 text-sm font-semibold uppercase tracking-[0.35em] text-primary">
+        <p
+          className="animate-hero-in mb-6 text-sm font-semibold uppercase tracking-[0.35em] text-primary"
+          style={{ animationDelay: "0ms" }}
+        >
           Welcome to Aanya Engineers
         </p>
-        <h1 className="max-w-5xl font-display text-5xl font-bold leading-[1.05] sm:text-6xl md:text-7xl">
+        <h1
+          className="animate-hero-in max-w-5xl font-display text-5xl font-bold leading-[1.05] sm:text-6xl md:text-7xl"
+          style={{ animationDelay: "150ms" }}
+        >
           Engineering Solutions That <span className="text-primary">Power</span> Industries and
           Progress
         </h1>
-        <p className="mt-8 max-w-2xl text-lg text-dark-foreground/80">
+        <p
+          className="animate-hero-in mt-8 max-w-2xl text-lg text-dark-foreground/80"
+          style={{ animationDelay: "300ms" }}
+        >
           Multidisciplinary engineering, fabrication, and construction solutions for Oil & Gas,
           Petrochemical, Infrastructure, Power, and Industrial sectors — delivered with precision,
           safety, and excellence.
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div
+          className="animate-hero-in mt-10 flex flex-wrap items-center justify-center gap-4"
+          style={{ animationDelay: "450ms" }}
+        >
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition shadow-xl shadow-primary/30"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition hover:shadow-2xl hover:shadow-primary/50 shadow-xl shadow-primary/30"
           >
             Get Free Quote
           </Link>
@@ -74,7 +89,7 @@ function AboutTeaser() {
         <div className="relative">
           <img
             src={aboutImg}
-            alt="AEPL engineers on site"
+            alt="Aanya Engineers engineers on site"
             width={900}
             height={1100}
             loading="lazy"
@@ -130,7 +145,7 @@ function AboutTeaser() {
             to="/about"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-dark px-7 py-4 text-sm font-semibold text-dark-foreground hover:bg-dark/90 transition"
           >
-            Learn more about AEPL →
+            Learn more about Aanya Engineers →
           </Link>
         </div>
       </div>
@@ -153,24 +168,23 @@ function ServicesPreview() {
           </p>
         </div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.slice(0, 4).map((s) => (
-            <article
-              key={s.title}
-              className="group overflow-hidden rounded-2xl bg-dark-foreground/5 ring-1 ring-dark-foreground/10 hover:ring-primary/50 transition-all hover:-translate-y-1 duration-300"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg font-semibold leading-tight">{s.title}</h3>
-                <p className="mt-2 text-sm text-dark-foreground/70 line-clamp-2">{s.desc}</p>
-              </div>
-            </article>
+          {services.slice(0, 4).map((s, index) => (
+            <FadeUp key={s.title} delay={index * 80}>
+              <article className="group overflow-hidden rounded-2xl bg-dark-foreground/5 ring-1 ring-dark-foreground/10 hover:ring-primary/50 transition-all hover:-translate-y-1 duration-300 border-t-2 border-t-transparent hover:border-t-primary hover:shadow-lg hover:shadow-primary/10">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-display text-lg font-semibold leading-tight">{s.title}</h3>
+                  <p className="mt-2 text-sm text-dark-foreground/70 line-clamp-2">{s.desc}</p>
+                </div>
+              </article>
+            </FadeUp>
           ))}
         </div>
         <div className="mt-12 text-center">
@@ -219,7 +233,7 @@ function CompetenciesBlock() {
 }
 
 function TestimonialsCarousel() {
-  const { testimonials } = useSiteData();
+  const { testimonials, loading } = useSiteData();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [
     Autoplay({ delay: 5000, stopOnInteraction: false }),
   ]);
@@ -253,51 +267,63 @@ function TestimonialsCarousel() {
             What people are saying about us
           </h2>
         </div>
-        <div className="mt-16 overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-6">
-            {testimonials.map((t) => (
-              <figure
-                key={t.name}
-                className="min-w-0 shrink-0 basis-full md:basis-1/2 rounded-2xl bg-dark-foreground/5 p-8 ring-1 ring-dark-foreground/10"
-              >
-                <StarRating rating={t.rating} />
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="text-primary mt-5"
-                >
-                  <path d="M7 7h4v4H8c0 2 1 3 3 3v3c-4 0-7-2-7-6V7zm9 0h4v4h-3c0 2 1 3 3 3v3c-4 0-7-2-7-6V7z" />
-                </svg>
-                <blockquote className="mt-4 text-dark-foreground/90 leading-relaxed">
-                  {t.text}
-                </blockquote>
-                <figcaption className="mt-6">
-                  <div className="font-semibold text-primary">{t.name}</div>
-                  <div className="text-sm text-dark-foreground/60 mt-0.5">{t.role}</div>
-                </figcaption>
-              </figure>
-            ))}
+
+        {loading ? (
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            <SkeletonCard />
+            <SkeletonCard />
           </div>
-        </div>
-        <div className="mt-8 flex justify-center gap-2">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollTo(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 rounded-full transition-all ${i === selectedIndex ? "w-6 bg-primary" : "w-2 bg-dark-foreground/30"}`}
-            />
-          ))}
-        </div>
+        ) : testimonials.length === 0 ? (
+          <p className="mt-16 text-center text-dark-foreground/60">No testimonials yet.</p>
+        ) : (
+          <>
+            <div className="mt-16 overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-6">
+                {testimonials.map((t) => (
+                  <figure
+                    key={t.name}
+                    className="min-w-0 shrink-0 basis-full md:basis-1/2 rounded-2xl bg-dark-foreground/5 p-8 ring-1 ring-dark-foreground/10"
+                  >
+                    <StarRating rating={t.rating} />
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="text-primary mt-5"
+                    >
+                      <path d="M7 7h4v4H8c0 2 1 3 3 3v3c-4 0-7-2-7-6V7zm9 0h4v4h-3c0 2 1 3 3 3v3c-4 0-7-2-7-6V7z" />
+                    </svg>
+                    <blockquote className="mt-4 text-dark-foreground/90 leading-relaxed">
+                      {t.text}
+                    </blockquote>
+                    <figcaption className="mt-6">
+                      <div className="font-semibold text-primary">{t.name}</div>
+                      <div className="text-sm text-dark-foreground/60 mt-0.5">{t.role}</div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+            <div className="mt-8 flex justify-center gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollTo(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-2 rounded-full transition-all ${i === selectedIndex ? "w-6 bg-primary" : "w-2 bg-dark-foreground/30"}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
 }
 
 function BlogPreview() {
-  const { blogPosts } = useSiteData();
+  const { blogPosts, loading } = useSiteData();
   return (
     <section className="container-x py-24 md:py-32">
       <div className="mx-auto max-w-3xl text-center mb-12">
@@ -308,34 +334,47 @@ function BlogPreview() {
           Articles &amp; blog posts
         </h2>
       </div>
-      <div className="grid gap-8 md:grid-cols-3">
-        {blogPosts.map((p) => (
-          <article
-            key={p.slug}
-            className="group overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-shadow"
-          >
-            <div className="overflow-hidden">
-              <img
-                src={p.img}
-                alt={p.title}
-                loading="lazy"
-                className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">{p.date}</p>
-              <h3 className="mt-2 font-display text-xl font-semibold leading-tight">{p.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">{p.excerpt}</p>
-              <a
-                href="#"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
-              >
-                Read article →
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="grid gap-8 md:grid-cols-3">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
+      ) : blogPosts.length === 0 ? (
+        <p className="text-center text-muted-foreground py-12">
+          No articles yet. Check back soon.
+        </p>
+      ) : (
+        <div className="grid gap-8 md:grid-cols-3">
+          {blogPosts.map((p, index) => (
+            <FadeUp key={p.slug} delay={index * 80}>
+              <article className="group overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-shadow">
+                <div className="overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">{p.date}</p>
+                  <h3 className="mt-2 font-display text-xl font-semibold leading-tight">{p.title}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">{p.excerpt}</p>
+                  <a
+                    href="#"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
+                  >
+                    Read article →
+                  </a>
+                </div>
+              </article>
+            </FadeUp>
+          ))}
+        </div>
+      )}
+
       <div className="mt-10 text-center">
         <Link
           to="/blog"

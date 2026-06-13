@@ -11,9 +11,9 @@ export function Logo({ light = false }: { light?: boolean }) {
       </div>
       <div className="leading-tight">
         <div
-          className={`font-display text-xl font-bold ${light ? "text-dark-foreground" : "text-foreground"}`}
+          className={`font-display text-base font-bold leading-none ${light ? "text-dark-foreground" : "text-foreground"}`}
         >
-          AEPL
+          Aanya Engineers
         </div>
         <div
           className={`text-[10px] tracking-[0.2em] ${light ? "text-dark-foreground/70" : "text-muted-foreground"}`}
@@ -112,8 +112,13 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
           )}
         </button>
       </div>
-      {open && (
-        <div className="md:hidden mx-4 mb-4 rounded-2xl bg-dark/95 p-6 backdrop-blur">
+      {/* Mobile menu — always in DOM, animated via max-height */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          open ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="mx-4 mb-4 rounded-2xl bg-dark/95 p-6 backdrop-blur">
           {NAV.map((l) => (
             <Link
               key={l.to}
@@ -132,7 +137,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
             Get a Quote
           </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 }
@@ -405,7 +410,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-dark-foreground/10 pt-6 text-xs text-dark-foreground/60 md:flex-row">
-          <p>Copyright © 2026 AEPL. All Rights Reserved.</p>
+          <p>Copyright © 2026 Aanya Engineers. All Rights Reserved.</p>
           <div className="flex gap-5">
             {SOCIALS.map((s) => (
               <a key={s.label} href={s.href} className="hover:text-primary transition-colors">
@@ -477,7 +482,7 @@ export function PageHero({
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-dark-foreground/75">{subtitle}</p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-dark-foreground/75">{subtitle}</p>
         )}
         {breadcrumb && (
           <div className="flex justify-center mt-8">

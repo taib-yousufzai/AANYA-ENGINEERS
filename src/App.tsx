@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import Home from "./routes/index";
 import About from "./routes/about";
 import Careers from "./routes/careers";
@@ -21,10 +21,12 @@ import TestimonialsManager from "./routes/admin/testimonials";
 import { AuthGuard } from "./components/admin/AuthGuard";
 import { AdminShell } from "./components/admin/AdminShell";
 
-export default function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
+
   return (
-    <SiteDataProvider>
-      <Routes>
+    <div key={location.key} className="animate-page-in">
+      <Routes location={location}>
         {/* Public site routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -54,6 +56,14 @@ export default function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <SiteDataProvider>
+      <AnimatedRoutes />
     </SiteDataProvider>
   );
 }
