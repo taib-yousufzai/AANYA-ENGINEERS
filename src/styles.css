@@ -36,7 +36,7 @@
   --foreground: oklch(0.18 0.02 250);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.02 250);
-  --primary: oklch(0.78 0.17 65);            /* AEPL orange/yellow */
+  --primary: oklch(0.78 0.17 65); /* AEPL orange/yellow */
   --primary-foreground: oklch(0.15 0.02 250);
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.18 0.02 250);
@@ -52,22 +52,37 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer utilities {
   .text-gradient-fade {
-    background: linear-gradient(90deg, var(--color-foreground) 0%, var(--color-foreground) 50%, color-mix(in oklab, var(--color-foreground) 15%, transparent) 100%);
+    background: linear-gradient(
+      90deg,
+      var(--color-foreground) 0%,
+      var(--color-foreground) 50%,
+      color-mix(in oklab, var(--color-foreground) 15%, transparent) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .container-x { @apply mx-auto max-w-7xl px-6 lg:px-8; }
+  .container-x {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+  }
 }
