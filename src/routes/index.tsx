@@ -8,8 +8,8 @@ import { useSiteData } from "@/context/SiteDataContext";
 import { FadeUp } from "@/hooks/use-fade-up";
 import { SkeletonCard } from "@/components/site/Skeleton";
 
-const heroImg = "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1920&q=85";
-const aboutImg = "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80";
+const heroImg = "/images/hero_refinery_1781504058257.png";
+const aboutImg = "/images/about_engineers_1781504071756.png";
 
 export default function Home() {
   return (

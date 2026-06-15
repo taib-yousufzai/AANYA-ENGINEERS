@@ -2,57 +2,57 @@ export const services = [
   {
     title: "Mechanical Construction & Plant Erection",
     desc: "Comprehensive mechanical construction, equipment erection, and installation for industrial plants and process facilities.",
-    img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
+    img: "/images/service_mechanical_1781504087376.png",
   },
   {
     title: "Petroleum Terminals, Storage Tanks & Gas Processing Facilities",
     desc: "Reliable fabrication, erection, and commissioning of petroleum terminals, storage tanks, and gas processing facilities.",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+    img: "/images/service_pipeline_1781504102608.png",
   },
   {
     title: "New Industrial Facilities & Capacity Expansion",
     desc: "Expert execution of new industrial facilities, capacity expansions, and critical shutdown and revamp projects.",
-    img: "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+    img: "/images/service_industrial_1781504115613.png",
   },
   {
     title: "Equipment Erection & Installation",
     desc: "Reliable erection and installation of heavy process equipment and machinery in compliance with applicable codes and standards.",
-    img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+    img: "/images/hero_refinery_1781504058257.png",
   },
   {
     title: "Piping Systems, Civil Works & Structural Construction",
     desc: "Comprehensive piping systems, civil engineering, and structural construction for industrial and energy projects.",
-    img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
+    img: "/images/about_engineers_1781504071756.png",
   },
   {
     title: "Surface Preparation, Protective Coatings & Painting",
     desc: "Specialist surface preparation, protective coating application, and industrial painting services.",
-    img: "https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?w=800&q=80",
+    img: "/images/service_mechanical_1781504087376.png",
   },
   {
     title: "Cross-Country Pipelines & City Gas Distribution Networks",
     desc: "Safe and reliable execution of cross-country pipeline and city gas distribution network projects across India.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    img: "/images/service_pipeline_1781504102608.png",
   },
   {
     title: "Electrical & Instrumentation Works",
     desc: "Complete electrical and instrumentation installation, commissioning, and maintenance for industrial plants and infrastructure.",
-    img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
+    img: "/images/service_industrial_1781504115613.png",
   },
   {
     title: "Thermal Insulation Solutions",
     desc: "High-quality thermal insulation services for piping, equipment, and process systems.",
-    img: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80",
+    img: "/images/hero_refinery_1781504058257.png",
   },
   {
     title: "Shutdown, Maintenance & Revamp Services",
     desc: "Planned shutdown, turnaround, maintenance, and revamp services to maximise plant uptime and performance.",
-    img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
+    img: "/images/about_engineers_1781504071756.png",
   },
   {
     title: "Infrastructure Development Projects",
     desc: "Execution of large-scale infrastructure development projects for public and industrial sectors.",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    img: "/images/service_mechanical_1781504087376.png",
   },
 ];
 
@@ -179,18 +179,18 @@ export const faqs = [
 ];
 
 export const galleryImages = [
-  "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80",
-  "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
-  "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
-  "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
-  "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
-  "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
-  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-  "https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?w=800&q=80",
-  "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+  "/images/service_pipeline_1781504102608.png",
+  "/images/service_industrial_1781504115613.png",
+  "/images/hero_refinery_1781504058257.png",
+  "/images/about_engineers_1781504071756.png",
+  "/images/service_mechanical_1781504087376.png",
+  "/images/service_pipeline_1781504102608.png",
+  "/images/service_industrial_1781504115613.png",
+  "/images/hero_refinery_1781504058257.png",
+  "/images/about_engineers_1781504071756.png",
+  "/images/service_mechanical_1781504087376.png",
+  "/images/service_pipeline_1781504102608.png",
+  "/images/service_industrial_1781504115613.png",
 ];
 
 export const blogPosts = [
@@ -199,21 +199,21 @@ export const blogPosts = [
     title: "Industrial Safety Standards in 2026",
     excerpt: "How Aanya Engineers maintains world-class HSE standards across all project sites.",
     date: "May 12, 2026",
-    img: "https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?w=900&q=80",
+    img: "/images/blog_safety_1781504340038.png",
   },
   {
     slug: "pipeline-execution",
     title: "Cross Country Pipeline Execution Best Practices",
     excerpt: "Key learnings from large-scale CGD and cross-country pipeline projects.",
     date: "April 03, 2026",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
+    img: "/images/blog_pipeline_1781504352545.png",
   },
   {
     slug: "storage-tank-terminals",
     title: "Engineering Reliable Storage Tank Terminals",
     excerpt: "Design, fabrication and erection considerations for petroleum storage.",
     date: "March 18, 2026",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80",
+    img: "/images/blog_storage_1781504366516.png",
   },
 ];
 
@@ -229,25 +229,25 @@ export const teamMembers = [
     name: "Amit Kumar",
     role: "Founder & Managing Director",
     bio: "Seasoned engineering and project management professional with over 17 years of experience in Oil & Gas, Energy, Refining, Pipeline, and Industrial Construction. Mechanical Engineer with an MBA in Operations Management and a certified Project Management Professional (PMP).",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+    img: "/images/team_md_1781504433489.png",
   },
   {
     name: "Placeholder Name",
     role: "Chief Engineer",
     bio: "",
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80",
+    img: "/images/team_chief_engineer_1781504299953.png",
   },
   {
     name: "Placeholder Name",
     role: "Project Manager",
     bio: "",
-    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80",
+    img: "/images/team_project_manager_1781504312927.png",
   },
   {
     name: "Placeholder Name",
     role: "HSE Manager",
     bio: "",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+    img: "/images/team_hse_manager_1781504326084.png",
   },
 ];
 
@@ -259,7 +259,7 @@ export const projects = [
     year: "2026",
     status: "Ongoing" as const,
     desc: "Piping fabrication and erection works for the Process Recovery Unit at IOCL Panipat refinery, executed in compliance with applicable industry codes and quality standards.",
-    img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
+    img: "/images/project_pru_1781504381752.png",
   },
   {
     title: "Diyodar–Lakhni Lift Irrigation Scheme",
@@ -268,7 +268,7 @@ export const projects = [
     year: "2026",
     status: "Ongoing" as const,
     desc: "Mechanical construction and pipeline works for the Diyodar–Lakhni Lift Irrigation Scheme, supporting critical water infrastructure development in Gujarat.",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    img: "/images/project_irrigation_1781504394848.png",
   },
   {
     title: "Cross Country Gas Pipeline",
@@ -277,7 +277,7 @@ export const projects = [
     year: "2025",
     status: "Completed" as const,
     desc: "Execution of cross-country natural gas pipeline including welding, testing, and commissioning as per PNGRB standards.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    img: "/images/project_gas_pipeline_1781504409330.png",
   },
   {
     title: "Petroleum Storage Terminal",
@@ -286,7 +286,7 @@ export const projects = [
     year: "2024",
     status: "Completed" as const,
     desc: "Fabrication and erection of floating roof storage tanks at a petroleum terminal, executed in compliance with applicable codes and client specifications.",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+    img: "/images/project_terminal_1781504447359.png",
   },
   {
     title: "Refinery Shutdown & Maintenance",
@@ -295,7 +295,7 @@ export const projects = [
     year: "2024",
     status: "Completed" as const,
     desc: "Critical shutdown maintenance, inspection, and revamp works for distillation and hydrocracker units within scheduled downtime.",
-    img: "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+    img: "/images/service_mechanical_1781504087376.png",
   },
   {
     title: "Industrial Fire Protection System",
@@ -304,7 +304,7 @@ export const projects = [
     year: "2025",
     status: "Completed" as const,
     desc: "Turnkey installation of deluge systems, hydrant networks, foam systems, and control panels for a large industrial complex.",
-    img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+    img: "/images/service_industrial_1781504115613.png",
   },
 ];
 

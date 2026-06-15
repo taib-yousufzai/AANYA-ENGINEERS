@@ -11,7 +11,7 @@ import {
 import { useSiteData } from "@/context/SiteDataContext";
 import { useState } from "react";
 
-const aboutImg = "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80";
+const aboutImg = "/images/about_engineers_1781504071756.png";
 import { FadeUp } from "@/hooks/use-fade-up";
 
 export default function AboutPage() {
