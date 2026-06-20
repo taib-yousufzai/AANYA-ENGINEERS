@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useSiteData } from "@/context/SiteDataContext";
 import type { TeamMember } from "@/context/SiteDataContext";
 import { validateTeamMember } from "@/lib/validation";
@@ -18,6 +18,7 @@ export default function TeamManager() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [deleteTarget, setDeleteTarget] = useState<TeamMember | null>(null);
   const [editingTarget, setEditingTarget] = useState<string | null>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -51,6 +52,9 @@ export default function TeamManager() {
     setForm(member);
     setEditingTarget(member.name);
     setErrors({});
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
   }
 
   function handleCancelEdit() {
@@ -77,7 +81,7 @@ export default function TeamManager() {
         onDelete={(item) => setDeleteTarget(item)}
       />
 
-      <div className="border rounded-lg p-6 space-y-4 max-w-lg">
+      <div ref={formRef} className="border rounded-lg p-6 space-y-4 max-w-lg">
         <h2 className="text-lg font-medium">{editingTarget ? "Edit Team Member" : "Add Team Member"}</h2>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {(["name", "role"] as const).map((field) => (

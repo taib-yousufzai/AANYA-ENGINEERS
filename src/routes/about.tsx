@@ -276,24 +276,12 @@ export default function AboutPage() {
                 </div>
               </div>
               <div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Mr. Amit Kumar is a seasoned engineering and project management professional with
-                  over 17 years of experience in the Oil &amp; Gas, Energy, Refining, Pipeline, and
-                  Industrial Construction sectors. A Mechanical Engineer with an MBA in Operations
-                  Management, he has successfully led and delivered complex projects across the entire
-                  project lifecycle.
-                </p>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
-                  Over the course of his career, he has managed large-scale shutdown projects,
-                  cross-country pipeline developments, city gas distribution networks, plant piping
-                  systems, and industrial infrastructure projects for leading organisations in the
-                  sector.
-                </p>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
-                  A certified Project Management Professional (PMP), Mr. Kumar is known for his
-                  strategic thinking, technical leadership, and commitment to quality, safety, and
-                  performance. Under his leadership, Aanya Engineers delivers reliable, innovative,
-                  and technically robust solutions that create long-term value for clients.
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                  {teamMembers[0]?.bio || `Mr. Amit Kumar is a seasoned engineering and project management professional with over 17 years of experience in the Oil & Gas, Energy, Refining, Pipeline, and Industrial Construction sectors. A Mechanical Engineer with an MBA in Operations Management, he has successfully led and delivered complex projects across the entire project lifecycle.
+
+Over the course of his career, he has managed large-scale shutdown projects, cross-country pipeline developments, city gas distribution networks, plant piping systems, and industrial infrastructure projects for leading organisations in the sector.
+
+A certified Project Management Professional (PMP), Mr. Kumar is known for his strategic thinking, technical leadership, and commitment to quality, safety, and performance. Under his leadership, Aanya Engineers delivers reliable, innovative, and technically robust solutions that create long-term value for clients.`}
                 </p>
                 <blockquote className="mt-6 border-l-4 border-primary pl-4 italic text-foreground/70">
                   "Great projects are built on a foundation of vision, expertise, and unwavering
