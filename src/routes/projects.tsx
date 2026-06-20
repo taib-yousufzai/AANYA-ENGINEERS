@@ -3,6 +3,7 @@ import { PageShell, PageHero } from "@/components/site/layout";
 import { useSiteData } from "@/context/SiteDataContext";
 import { FadeUp } from "@/hooks/use-fade-up";
 import { SkeletonCard } from "@/components/site/Skeleton";
+import { slugify } from "@/lib/slug";
 
 export default function ProjectsPage() {
   const { projects, loading } = useSiteData();
@@ -57,32 +58,40 @@ export default function ProjectsPage() {
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((p, index) => (
                 <FadeUp key={p.title} delay={index * 80}>
-                  <article className="group overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-shadow">
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <img
-                        src={p.img}
-                        alt={p.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      />
-                      <span
-                        className={`absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold transition-all group-hover:brightness-110 ${p.status === "Ongoing" ? "bg-primary text-primary-foreground" : "bg-dark/80 text-dark-foreground backdrop-blur-sm"}`}
-                      >
-                        {p.status}
-                      </span>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                          {p.category}
+                  <Link to={`/projects/${slugify(p.title)}`} className="block group h-full">
+                    <article className="h-full overflow-hidden rounded-2xl border bg-card hover:shadow-xl transition-shadow flex flex-col">
+                      <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                        <img
+                          src={p.img}
+                          alt={p.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
+                        <span
+                          className={`absolute top-4 right-4 rounded-full px-3 py-1 text-xs font-semibold transition-all group-hover:brightness-110 ${p.status === "Ongoing" ? "bg-primary text-primary-foreground" : "bg-dark/80 text-dark-foreground backdrop-blur-sm"}`}
+                        >
+                          {p.status}
                         </span>
-                        <span className="text-xs text-muted-foreground">{p.year}</span>
                       </div>
-                      <h3 className="font-display text-lg font-semibold leading-tight">{p.title}</h3>
-                      <p className="mt-1 text-sm font-medium text-primary">{p.client}</p>
-                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.description}</p>
-                    </div>
-                  </article>
+                      <div className="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                              {p.category}
+                            </span>
+                            <span className="text-xs text-muted-foreground">{p.year}</span>
+                          </div>
+                          <h3 className="font-display text-lg font-semibold leading-tight group-hover:text-primary transition-colors">{p.title}</h3>
+                          <p className="mt-1 text-sm font-medium text-primary">{p.client}</p>
+                          <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">{p.description}</p>
+                        </div>
+                        <div className="mt-6 pt-4 border-t flex items-center justify-between text-sm font-semibold text-primary">
+                          <span>View Project Details</span>
+                          <span className="transition-transform group-hover:translate-x-1">→</span>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
                 </FadeUp>
               ))}
             </div>

@@ -94,22 +94,31 @@ export default function ProjectsManager() {
   async function seedProjects() {
     const defaultProjects: Project[] = [
       {
-        title: "Piping Fabrication & Erection for PRU",
-        client: "Indian Oil Corporation Limited (IOCL), Panipat",
+        title: "PRU Piping Fabrication & Erection (IOCL Panipat)",
+        client: "Indian Oil Corporation Limited (IOCL)",
         category: "Fabrication & Erection",
         year: new Date().getFullYear().toString(),
         status: "Ongoing",
-        description: "Piping Fabrication & Erection for PRU at Indian Oil Corporation Limited (IOCL), Panipat.",
-        img: ""
+        description: "Piping fabrication and erection works for the Process Recovery Unit (PRU) at the IOCL Panipat refinery complex, executed in compliance with international quality and safety codes.",
+        img: "/images/project_pru_pdf_1.png"
       },
       {
         title: "Diyodar–Lakhni Lift Irrigation Scheme",
-        client: "Palanpur, Gujarat",
+        client: "Gujarat Water Infrastructure",
         category: "Infrastructure",
         year: new Date().getFullYear().toString(),
         status: "Ongoing",
-        description: "Diyodar–Lakhni Lift Irrigation Scheme in Palanpur, Gujarat.",
-        img: ""
+        description: "Mechanical construction, pipeline trenching, and utility piping works for the Diyodar–Lakhni Lift Irrigation Scheme.",
+        img: "/images/project_irrigation_pdf_1.png"
+      },
+      {
+        title: "Palanpur, Gujarat",
+        client: "Water Resources Department",
+        category: "Pipeline & Civil",
+        year: new Date().getFullYear().toString(),
+        status: "Ongoing",
+        description: "Laying of large-diameter cross-country water transmission pipelines and associated civil engineering structures in Palanpur, Gujarat.",
+        img: "/images/project_irrigation_pdf_2.png"
       }
     ];
 

@@ -4,6 +4,7 @@ import About from "./routes/about";
 import Careers from "./routes/careers";
 import Services from "./routes/services";
 import Projects from "./routes/projects";
+import ProjectDetail from "./routes/projects/detail";
 
 import Blog from "./routes/blog";
 import Contact from "./routes/contact";
@@ -33,6 +34,7 @@ function AnimatedRoutes() {
         <Route path="/careers" element={<Careers />} />
         <Route path="/services" element={<Services />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
 
