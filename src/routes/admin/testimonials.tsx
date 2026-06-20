@@ -12,10 +12,11 @@ import { Textarea } from "@/components/ui/textarea";
 const EMPTY_FORM: Testimonial = { name: "", role: "", rating: 5, text: "" };
 
 export default function TestimonialsManager() {
-  const { testimonials, addTestimonial, removeTestimonial } = useSiteData();
+  const { testimonials, addTestimonial, updateTestimonial, removeTestimonial } = useSiteData();
   const [form, setForm] = useState<Testimonial>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [deleteTarget, setDeleteTarget] = useState<Testimonial | null>(null);
+  const [editingTarget, setEditingTarget] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -35,8 +36,25 @@ export default function TestimonialsManager() {
       setErrors(result.errors);
       return;
     }
-    await addTestimonial(form);
+    if (editingTarget) {
+      await updateTestimonial(editingTarget, form);
+    } else {
+      await addTestimonial(form);
+    }
     setForm(EMPTY_FORM);
+    setErrors({});
+    setEditingTarget(null);
+  }
+
+  function handleEdit(testimonial: Testimonial) {
+    setForm(testimonial);
+    setEditingTarget(testimonial.name);
+    setErrors({});
+  }
+
+  function handleCancelEdit() {
+    setForm(EMPTY_FORM);
+    setEditingTarget(null);
     setErrors({});
   }
 
@@ -59,11 +77,12 @@ export default function TestimonialsManager() {
           { label: "Rating", accessor: "rating" },
           { label: "Testimonial", accessor: "text" },
         ]}
+        onEdit={handleEdit}
         onDelete={(item) => setDeleteTarget(item)}
       />
 
       <div className="border rounded-lg p-6 space-y-4 max-w-lg">
-        <h2 className="text-lg font-medium">Add Testimonial</h2>
+        <h2 className="text-lg font-medium">{editingTarget ? "Edit Testimonial" : "Add Testimonial"}</h2>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {(["name", "role"] as const).map((field) => (
             <div key={field} className="space-y-1">
@@ -119,7 +138,14 @@ export default function TestimonialsManager() {
             )}
           </div>
 
-          <Button type="submit">Add Testimonial</Button>
+          <div className="flex gap-2">
+            <Button type="submit">{editingTarget ? "Save Changes" : "Add Testimonial"}</Button>
+            {editingTarget && (
+              <Button type="button" variant="outline" onClick={handleCancelEdit}>
+                Cancel
+              </Button>
+            )}
+          </div>
         </form>
       </div>
 

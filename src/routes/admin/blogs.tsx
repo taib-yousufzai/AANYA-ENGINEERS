@@ -12,10 +12,11 @@ import { ImageUpload } from "@/components/admin/ImageUpload";
 const EMPTY_FORM: BlogPost = { title: "", slug: "", excerpt: "", date: "", img: "" };
 
 export default function BlogsManager() {
-  const { blogPosts, addBlogPost, removeBlogPost } = useSiteData();
+  const { blogPosts, addBlogPost, updateBlogPost, removeBlogPost } = useSiteData();
   const [form, setForm] = useState<BlogPost>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [deleteTarget, setDeleteTarget] = useState<BlogPost | null>(null);
+  const [editingTarget, setEditingTarget] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -30,14 +31,34 @@ export default function BlogsManager() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const existingSlugs = blogPosts.map((p) => p.slug);
+    const existingSlugs = editingTarget 
+      ? blogPosts.filter(p => p.slug !== editingTarget).map((p) => p.slug)
+      : blogPosts.map((p) => p.slug);
+      
     const result = validateBlogPost(form, existingSlugs);
     if (!result.valid) {
       setErrors(result.errors);
       return;
     }
-    await addBlogPost(form);
+    if (editingTarget) {
+      await updateBlogPost(editingTarget, form);
+    } else {
+      await addBlogPost(form);
+    }
     setForm(EMPTY_FORM);
+    setErrors({});
+    setEditingTarget(null);
+  }
+
+  function handleEdit(post: BlogPost) {
+    setForm(post);
+    setEditingTarget(post.slug);
+    setErrors({});
+  }
+
+  function handleCancelEdit() {
+    setForm(EMPTY_FORM);
+    setEditingTarget(null);
     setErrors({});
   }
 
@@ -60,11 +81,12 @@ export default function BlogsManager() {
           { label: "Date", accessor: "date" },
           { label: "Excerpt", accessor: "excerpt" },
         ]}
+        onEdit={handleEdit}
         onDelete={(item) => setDeleteTarget(item)}
       />
 
       <div className="border rounded-lg p-6 space-y-4 max-w-lg">
-        <h2 className="text-lg font-medium">Add Blog Post</h2>
+        <h2 className="text-lg font-medium">{editingTarget ? "Edit Blog Post" : "Add Blog Post"}</h2>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {(["title", "slug", "excerpt", "date"] as const).map((field) => (
             <div key={field} className="space-y-1">
@@ -93,7 +115,14 @@ export default function BlogsManager() {
               error={errors.img}
             />
           </div>
-          <Button type="submit">Add Post</Button>
+          <div className="flex gap-2">
+            <Button type="submit">{editingTarget ? "Save Changes" : "Add Post"}</Button>
+            {editingTarget && (
+              <Button type="button" variant="outline" onClick={handleCancelEdit}>
+                Cancel
+              </Button>
+            )}
+          </div>
         </form>
       </div>
 

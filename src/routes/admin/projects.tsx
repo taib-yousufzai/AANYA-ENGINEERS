@@ -28,10 +28,11 @@ const EMPTY_FORM: Project = {
 };
 
 export default function ProjectsManager() {
-  const { projects, addProject, removeProject } = useSiteData();
+  const { projects, addProject, updateProject, removeProject } = useSiteData();
   const [form, setForm] = useState<Project>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [deleteTarget, setDeleteTarget] = useState<Project | null>(null);
+  const [editingTarget, setEditingTarget] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -61,8 +62,25 @@ export default function ProjectsManager() {
       setErrors(result.errors);
       return;
     }
-    await addProject(form);
+    if (editingTarget) {
+      await updateProject(editingTarget, form);
+    } else {
+      await addProject(form);
+    }
     setForm(EMPTY_FORM);
+    setErrors({});
+    setEditingTarget(null);
+  }
+
+  function handleEdit(proj: Project) {
+    setForm(proj);
+    setEditingTarget(proj.title);
+    setErrors({});
+  }
+
+  function handleCancelEdit() {
+    setForm(EMPTY_FORM);
+    setEditingTarget(null);
     setErrors({});
   }
 
@@ -85,11 +103,12 @@ export default function ProjectsManager() {
           { label: "Category", accessor: "category" },
           { label: "Status", accessor: "status" },
         ]}
+        onEdit={handleEdit}
         onDelete={(item) => setDeleteTarget(item)}
       />
 
       <div className="border rounded-lg p-6 space-y-4 max-w-lg">
-        <h2 className="text-lg font-medium">Add Project</h2>
+        <h2 className="text-lg font-medium">{editingTarget ? "Edit Project" : "Add Project"}</h2>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {(["title", "client", "category", "year"] as const).map((field) => (
             <div key={field} className="space-y-1">
@@ -157,7 +176,14 @@ export default function ProjectsManager() {
               error={errors.img}
             />
           </div>
-          <Button type="submit">Add Project</Button>
+          <div className="flex gap-2">
+            <Button type="submit">{editingTarget ? "Save Changes" : "Add Project"}</Button>
+            {editingTarget && (
+              <Button type="button" variant="outline" onClick={handleCancelEdit}>
+                Cancel
+              </Button>
+            )}
+          </div>
         </form>
       </div>
 

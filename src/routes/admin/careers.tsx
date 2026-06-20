@@ -26,10 +26,11 @@ const EMPTY_FORM: JobOpening = {
 };
 
 export default function CareersManager() {
-  const { jobOpenings, addJobOpening, removeJobOpening } = useSiteData();
+  const { jobOpenings, addJobOpening, updateJobOpening, removeJobOpening } = useSiteData();
   const [form, setForm] = useState<JobOpening>(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [deleteTarget, setDeleteTarget] = useState<JobOpening | null>(null);
+  const [editingTarget, setEditingTarget] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -59,8 +60,25 @@ export default function CareersManager() {
       setErrors(result.errors);
       return;
     }
-    await addJobOpening(form);
+    if (editingTarget) {
+      await updateJobOpening(editingTarget, form);
+    } else {
+      await addJobOpening(form);
+    }
     setForm(EMPTY_FORM);
+    setErrors({});
+    setEditingTarget(null);
+  }
+
+  function handleEdit(job: JobOpening) {
+    setForm(job);
+    setEditingTarget(job.title);
+    setErrors({});
+  }
+
+  function handleCancelEdit() {
+    setForm(EMPTY_FORM);
+    setEditingTarget(null);
     setErrors({});
   }
 
@@ -83,11 +101,12 @@ export default function CareersManager() {
           { label: "Location", accessor: "location" },
           { label: "Type", accessor: "type" },
         ]}
+        onEdit={handleEdit}
         onDelete={(item) => setDeleteTarget(item)}
       />
 
       <div className="border rounded-lg p-6 space-y-4 max-w-lg">
-        <h2 className="text-lg font-medium">Add Career Opening</h2>
+        <h2 className="text-lg font-medium">{editingTarget ? "Edit Career Opening" : "Add Career Opening"}</h2>
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           {(["title", "department", "location", "experience"] as const).map((field) => (
             <div key={field} className="space-y-1">
@@ -142,7 +161,14 @@ export default function CareersManager() {
             )}
           </div>
 
-          <Button type="submit">Add Opening</Button>
+          <div className="flex gap-2">
+            <Button type="submit">{editingTarget ? "Save Changes" : "Add Opening"}</Button>
+            {editingTarget && (
+              <Button type="button" variant="outline" onClick={handleCancelEdit}>
+                Cancel
+              </Button>
+            )}
+          </div>
         </form>
       </div>
 
