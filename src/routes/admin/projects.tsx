@@ -91,9 +91,41 @@ export default function ProjectsManager() {
     }
   }
 
+  async function seedProjects() {
+    const defaultProjects: Project[] = [
+      {
+        title: "Piping Fabrication & Erection for PRU",
+        client: "Indian Oil Corporation Limited (IOCL), Panipat",
+        category: "Fabrication & Erection",
+        year: new Date().getFullYear().toString(),
+        status: "Ongoing",
+        description: "Piping Fabrication & Erection for PRU at Indian Oil Corporation Limited (IOCL), Panipat.",
+        img: ""
+      },
+      {
+        title: "Diyodar–Lakhni Lift Irrigation Scheme",
+        client: "Palanpur, Gujarat",
+        category: "Infrastructure",
+        year: new Date().getFullYear().toString(),
+        status: "Ongoing",
+        description: "Diyodar–Lakhni Lift Irrigation Scheme in Palanpur, Gujarat.",
+        img: ""
+      }
+    ];
+
+    for (const proj of defaultProjects) {
+      await addProject(proj);
+    }
+  }
+
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-semibold">Projects</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Projects</h1>
+        <Button onClick={seedProjects} variant="outline">
+          Seed Projects from PDF
+        </Button>
+      </div>
 
       <ContentTable<Project>
         rows={projects}
