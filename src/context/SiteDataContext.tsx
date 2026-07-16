@@ -19,6 +19,10 @@ export interface TeamMember {
   bio: string;
   img: string;
   position?: number;
+  instagram?: string;
+  facebook?: string;
+  twitter?: string;
+  linkedin?: string;
 }
 
 export interface JobOpening {

@@ -46,6 +46,20 @@ export interface TeamMember {
   role: string;
   bio: string;
   img: string;
+  instagram?: string;
+  facebook?: string;
+  twitter?: string;
+  linkedin?: string;
+}
+
+function validUrl(value: string | undefined, label: string): string | null {
+  if (!value || value.trim() === "") return null; // optional
+  try {
+    new URL(value.trim());
+    return null;
+  } catch {
+    return `${label} must be a valid URL (e.g. https://instagram.com/yourhandle).`;
+  }
 }
 
 export function validateTeamMember(member: TeamMember): ValidationResult {
@@ -59,7 +73,19 @@ export function validateTeamMember(member: TeamMember): ValidationResult {
   ];
 
   for (const [field, label] of fields) {
-    const err = required(member[field], label);
+    const err = required(member[field] as string, label);
+    if (err) errors[field] = err;
+  }
+
+  const socialFields: [keyof TeamMember, string][] = [
+    ["instagram", "Instagram"],
+    ["facebook", "Facebook"],
+    ["twitter", "X (Twitter)"],
+    ["linkedin", "LinkedIn"],
+  ];
+
+  for (const [field, label] of socialFields) {
+    const err = validUrl(member[field] as string | undefined, label);
     if (err) errors[field] = err;
   }
 

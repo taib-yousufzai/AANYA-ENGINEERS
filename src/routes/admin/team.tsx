@@ -10,7 +10,16 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 
-const EMPTY_FORM: TeamMember = { name: "", role: "", bio: "", img: "" };
+const EMPTY_FORM: TeamMember = {
+  name: "",
+  role: "",
+  bio: "",
+  img: "",
+  instagram: "",
+  facebook: "",
+  twitter: "",
+  linkedin: "",
+};
 
 export default function TeamManager() {
   const { teamMembers, addTeamMember, updateTeamMember, removeTeamMember, reorderTeamMembers } = useSiteData();
@@ -126,6 +135,37 @@ export default function TeamManager() {
               onChange={(url) => setForm((prev) => ({ ...prev, img: url }))}
               error={errors.img}
             />
+          </div>
+
+          {/* Social Links */}
+          <div className="space-y-3 pt-2">
+            <p className="text-sm font-medium text-muted-foreground">Social Links (optional)</p>
+            {(
+              [
+                { field: "linkedin" as const, label: "LinkedIn URL", placeholder: "https://linkedin.com/in/..." },
+                { field: "instagram" as const, label: "Instagram URL", placeholder: "https://instagram.com/..." },
+                { field: "facebook" as const, label: "Facebook URL", placeholder: "https://facebook.com/..." },
+                { field: "twitter" as const, label: "X (Twitter) URL", placeholder: "https://x.com/..." },
+              ] as const
+            ).map(({ field, label, placeholder }) => (
+              <div key={field} className="space-y-1">
+                <Label htmlFor={field}>{label}</Label>
+                <Input
+                  id={field}
+                  name={field}
+                  value={form[field] ?? ""}
+                  onChange={handleChange}
+                  placeholder={placeholder}
+                  type="url"
+                  aria-describedby={errors[field] ? `${field}-error` : undefined}
+                />
+                {errors[field] && (
+                  <p id={`${field}-error`} className="text-sm text-destructive">
+                    {errors[field]}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
           <div className="flex gap-2">
             <Button type="submit">{editingTarget ? "Save Changes" : "Add Member"}</Button>
