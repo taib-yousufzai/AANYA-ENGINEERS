@@ -38,7 +38,8 @@ export function AdminShell() {
       {/* Sidebar */}
       <aside className="w-60 shrink-0 border-r bg-muted/40 flex flex-col">
         {/* Logo / brand */}
-        <div className="h-14 flex items-center px-4 border-b">
+        <div className="h-14 flex items-center gap-2 px-4 border-b">
+          <img src="/images/AEPL_LOGO.png" alt="AEPL Logo" className="h-8 w-auto object-contain" />
           <span className="font-semibold text-sm tracking-wide">Admin Panel</span>
         </div>
 

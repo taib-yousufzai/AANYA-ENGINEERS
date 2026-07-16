@@ -6,9 +6,7 @@ import { Link } from "react-router";
 export function Logo({ light = false }: { light?: boolean }) {
   return (
     <div className="flex items-center gap-2">
-      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground font-display font-bold text-lg">
-        A
-      </div>
+      <img src="/images/AEPL_LOGO.png" alt="Aanya Engineers Logo" className="h-12 w-auto object-contain" />
       <div className="leading-tight">
         <div
           className={`font-display text-base font-bold leading-none ${light ? "text-dark-foreground" : "text-foreground"}`}
